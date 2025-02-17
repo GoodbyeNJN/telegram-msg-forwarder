@@ -1,0 +1,21 @@
+[package]
+name = "telegram-msg-forwarder"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.95"
+env_logger = "0.11.6"
+log = "0.4.25"
+reqwest = { version = "0.12.12", default-features = false, features = [
+    "rustls-tls",
+    "json",
+] }
+rocket = { version = "0.5.1", features = ["json"] }
+serde = "1.0.217"
+
+[profile.release]
+opt-level = "z"
+lto = "thin"
+debug = false
+strip = true
