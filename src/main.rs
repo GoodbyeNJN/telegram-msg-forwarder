@@ -19,7 +19,11 @@ static AUTH_TOKEN: LazyLock<Vec<String>> = LazyLock::new(|| {
         .context("Env variable `AUTH_TOKEN` is not set.")
         .unwrap();
 
-    token.split(' ').map(|s| s.to_string()).collect()
+    token
+        .split(' ')
+        .map(|s| s.trim().to_string())
+        .filter(|s| !s.is_empty())
+        .collect()
 });
 static CHAT_ID: LazyLock<String> = LazyLock::new(|| {
     var("TELEGRAM_CHAT_ID")
